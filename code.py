@@ -11,6 +11,11 @@ from adafruit_hid.keyboard_layout_us import KeyboardLayoutUS
 n = 1  # Number of NeoPixels
 pin = board.GP16  # Pin where NeoPixel is connected
 np = neopixel.NeoPixel(pin, n)
+
+# HID keyboard setup
+keyboard = Keyboard(usb_hid.devices)
+keyboard_layout = KeyboardLayoutUS(keyboard)
+
 # Load the config
 def read_config():
     """
