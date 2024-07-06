@@ -1,2 +1,4 @@
 # PipeButton
-Instant bioinformatics analysis at the push of a button
+
+Instant bioinformatics analysis at the push of a button.
+
