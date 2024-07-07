@@ -52,3 +52,15 @@ def execute_script():
     else:
         print("Script path not found in config file")
 
+def send_keystroke(key_names):
+    """
+    Sends a keystroke by pressing and releasing the specified keys.
+    """
+    config = read_config()
+    key_names = config.get('shortcut_keys')
+    keycodes = [eval(key_name) for key_name in key_names]
+    
+    if keycodes:
+        keyboard.press(*keycodes)
+        keyboard.release_all()
+
