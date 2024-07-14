@@ -64,3 +64,35 @@ def send_keystroke(key_names):
         keyboard.press(*keycodes)
         keyboard.release_all()
 
+def type_file_content():
+    """
+    Randomly selects a text file from the 'texts' directory and types its content.
+    Mimics natural typing speed and random mistakes.
+    """
+    config = read_config()
+    textdir = config.get('texts_dir')
+    try:
+        # Text files should be in the directory named 'texts'
+        files = os.listdir(textdir)
+        file_path = textdir + '/' + random.choice(files)
+        with open(file_path, 'r') as file:
+            content = file.read()
+            i = 0
+            while i < len(content):
+                char = content[i]
+                keyboard_layout.write(char)  # Type the character
+                i += 1
+                
+                # Random delay to mimic natural typing
+                time.sleep(random.uniform(0.02, 0.2))
+                
+                # Randomly simulate a typing mistake
+                if random.randint(1, 100) > 98:  # About 2% chance of a mistake
+                    # Simulate typing one wrong character then backspacing
+                    keyboard_layout.write(random.choice('abcdefghijklmnopqrstuvwxyz'))
+                    time.sleep(random.uniform(0.05, 0.3))
+                    keyboard_layout.write('\b')  # Backspace character
+                    time.sleep(random.uniform(0.05, 0.3))
+    except (OSError, FileNotFoundError) as e:
+        print(f"Error opening or reading file: {e}")
+
