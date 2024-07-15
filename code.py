@@ -74,7 +74,13 @@ def type_file_content():
     try:
         # Text files should be in the directory named 'texts'
         files = os.listdir(textdir)
+        if not files:
+            print("No text files found.")
+            return
+        
         file_path = textdir + '/' + random.choice(files)
+        if verbose:
+            print(f"Selected file: {file_path}")
         with open(file_path, 'r') as file:
             content = file.read()
             i = 0
@@ -84,7 +90,7 @@ def type_file_content():
                 i += 1
                 
                 # Random delay to mimic natural typing
-                time.sleep(random.uniform(0.02, 0.2))
+                time.sleep(random.uniform(0.0001, 0.01))
                 
                 # Randomly simulate a typing mistake
                 if random.randint(1, 100) > 98:  # About 2% chance of a mistake
@@ -93,6 +99,6 @@ def type_file_content():
                     time.sleep(random.uniform(0.05, 0.3))
                     keyboard_layout.write('\b')  # Backspace character
                     time.sleep(random.uniform(0.05, 0.3))
-    except (OSError, FileNotFoundError) as e:
+    except OSError as e:
         print(f"Error opening or reading file: {e}")
 
