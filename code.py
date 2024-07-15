@@ -46,16 +46,20 @@ def execute_script():
     Executes a script based on the configuration read from 'pipebutton.config' file.
     """
     config = read_config()
+    platform = config.get('platform')
     script_path = config.get('script_path')
 
     if script_path:
-        # Press Win + R to open the Run dialog
-        keyboard.press(Keycode.WINDOWS, Keycode.R)
-        keyboard.release_all()
-        time.sleep(1)
-
-        # Type the command to run PowerShell script
-        keyboard_layout.write(f'{script_path}\n')
+        if platform == "windows":
+            keyboard.press(Keycode.GUI, Keycode.R)
+            keyboard.release_all()
+            time.sleep(1)
+            keyboard_layout.write(f'{script_path}\n')
+        elif platform in ["linux", "mac"]:
+            keyboard.press(Keycode.CONTROL, Keycode.ALT, Keycode.T)
+            keyboard.release_all()
+            time.sleep(1)
+            keyboard_layout.write(f'{script_path}\n')
     else:
         print("Script path not found in config file")
 
