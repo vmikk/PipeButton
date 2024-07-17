@@ -89,6 +89,7 @@ def type_file_content():
     """
     Randomly selects a text file from the 'texts' directory and types its content.
     Mimics natural typing speed and random mistakes.
+    Allows interruption by pressing the button.
     """
     config = read_config()
     textdir = config.get('texts_dir')
@@ -106,6 +107,13 @@ def type_file_content():
             content = file.read()
             i = 0
             while i < len(content):
+
+                ## Check if the button is pressed again to interrupt typing
+                if not button.value:
+                    if verbose:
+                        print("Typing interrupted by button press.")
+                    return
+                
                 char = content[i]
                 keyboard_layout.write(char)  # Type the character
                 i += 1
