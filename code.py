@@ -123,3 +123,62 @@ def type_file_content():
     except OSError as e:
         print(f"Error opening or reading file: {e}")
 
+def main():
+    """
+    Main function that initializes the LED and executes the script after a delay.
+    """
+
+    led.value = True
+    button_was_pressed = False  # State to track button press
+    active_mode = None
+    active_pins = []
+
+    # Check each switch and add active ones to the list
+    if not switch_mode1.value:   # Inverted logic for pull-up
+        np[0] = (0, 255, 0)      # Green
+        active_pins.append("GP9")
+        active_mode = "Mode 1: Typing text files"
+    if not switch_mode2.value:   # Inverted logic for pull-up
+        np[0] = (0, 0, 255)      # Blue
+        active_pins.append("GP11")
+        active_mode = "Mode 2: Sending shortcut"
+    if not switch_mode3.value:   # Inverted logic for pull-up
+        np[0] = (255, 0, 0)      # Red
+        active_pins.append("GP13")
+        active_mode = "Mode 3: Executing custom script"
+
+    if verbose:
+        if active_mode:
+            print(f"{active_mode} active.")
+            print(f"Active pins: {', '.join(active_pins)}. Setting LED accordingly.")
+        else:
+            print("No active pins. LED turned off.")
+            np[0] = (0, 0, 0)  # Turn off LED if no switches are active
+
+    current_button_state = is_button_pressed()
+
+    # Check if the button is pressed when a mode is active
+    if active_mode and current_button_state and not button_was_pressed:
+        led.value = False  # Turn off the LED when button is pressed
+        if verbose:
+            print(f"Button pressed in {active_mode}.")
+        if active_mode.startswith("Mode 1"):
+            type_file_content()
+        elif active_mode.startswith("Mode 2"):
+            send_keystroke()
+        elif active_mode.startswith("Mode 3"):
+            ## Fetch the platform configuration from the config file
+            ## If no platform is specified, it defaults to 'windows'
+            execute_script(read_config().get('platform', 'windows'))
+        
+        ## Pause for a second with the LED off
+        time.sleep(0.5)
+        led.value = True  # Turn the LED back on after the pause
+
+    ## Update the last known button state
+    button_was_pressed = current_button_state  
+
+    ## Small delay for loop stability
+    time.sleep(0.1)
+
+
