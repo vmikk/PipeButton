@@ -41,6 +41,14 @@ def read_config():
         print(f"Error reading config file: {e}")
     return config
 
+def is_button_pressed():
+    """ Check if the button is pressed with debouncing. """
+    if not button.value:      # Button is pressed (pull-up means pressed is low/false)
+        time.sleep(0.1)       # Debounce delay
+        if not button.value:  # Check again after delay
+            return True
+    return False
+
 def execute_script():
     """
     Executes a script based on the configuration read from 'pipebutton.config' file.
