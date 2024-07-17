@@ -8,6 +8,9 @@ from adafruit_hid.keyboard import Keyboard
 from adafruit_hid.keycode import Keycode
 from adafruit_hid.keyboard_layout_us import KeyboardLayoutUS
 
+## Buit-in LED (NeoPixel)
+np = neopixel.NeoPixel(board.GP16, 1)
+
 ## Initialize digital inputs for the 3-positional slide switch
 switch_mode1 = digitalio.DigitalInOut(board.GP9)
 switch_mode1.direction = digitalio.Direction.INPUT
