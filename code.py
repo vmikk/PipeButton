@@ -8,6 +8,10 @@ from adafruit_hid.keyboard import Keyboard
 from adafruit_hid.keycode import Keycode
 from adafruit_hid.keyboard_layout_us import KeyboardLayoutUS
 
+## Verbose flag to control output of status messages
+verbose = True
+last_verbose_message = None  # Variable to store the last printed message
+
 ## Buit-in LED (NeoPixel)
 np = neopixel.NeoPixel(board.GP16, 1)
 
