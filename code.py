@@ -26,6 +26,11 @@ button = digitalio.DigitalInOut(board.GP28)
 button.direction = digitalio.Direction.INPUT
 button.pull = digitalio.Pull.UP  # Use Pull.UP if the other side of the button is connected to GND
 
+## Setup the button LED
+led = digitalio.DigitalInOut(board.GP26)
+led.direction = digitalio.Direction.OUTPUT
+
+## HID keyboard setup
 keyboard = Keyboard(usb_hid.devices)
 keyboard_layout = KeyboardLayoutUS(keyboard)
 
