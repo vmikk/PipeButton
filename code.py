@@ -69,6 +69,15 @@ def is_button_pressed():
             return True
     return False
 
+def verbose_print(message):
+    """
+    Prints the message only if it's different from the last printed message.
+    """
+    global last_verbose_message
+    if message != last_verbose_message:
+        print(message)
+        last_verbose_message = message
+
 def execute_script():
     """
     Executes a script based on the configuration read from 'pipebutton.config' file.
