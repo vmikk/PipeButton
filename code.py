@@ -21,6 +21,11 @@ switch_mode3 = digitalio.DigitalInOut(board.GP12)
 switch_mode3.direction = digitalio.Direction.INPUT
 switch_mode3.pull = digitalio.Pull.UP
 
+## Setup the push button
+button = digitalio.DigitalInOut(board.GP28)
+button.direction = digitalio.Direction.INPUT
+button.pull = digitalio.Pull.UP  # Use Pull.UP if the other side of the button is connected to GND
+
 keyboard = Keyboard(usb_hid.devices)
 keyboard_layout = KeyboardLayoutUS(keyboard)
 
