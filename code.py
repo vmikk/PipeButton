@@ -24,7 +24,10 @@ switch_mode3.pull = digitalio.Pull.UP
 keyboard = Keyboard(usb_hid.devices)
 keyboard_layout = KeyboardLayoutUS(keyboard)
 
-# Load the config
+## Variable to monitor button press time
+button_pressed_time = None
+
+## Load the config
 def read_config():
     """
     Reads the configuration from 'pipebutton.config' file.
