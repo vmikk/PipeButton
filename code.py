@@ -182,3 +182,7 @@ def main():
     time.sleep(0.1)
 
 
+## Run the main loop
+while True:
+    main()
+
