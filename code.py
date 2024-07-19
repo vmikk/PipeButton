@@ -1,6 +1,8 @@
 
 import time
+import digitalio
 import board
+import os
 import neopixel
 import random
 import usb_hid
