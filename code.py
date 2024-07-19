@@ -64,11 +64,10 @@ def read_config():
     return config
 
 def is_button_pressed():
-    """ Check if the button is pressed with debouncing. """
-    if not button.value:      # Button is pressed (pull-up means pressed is low/false)
-        time.sleep(0.1)       # Debounce delay
-        if not button.value:  # Check again after delay
-            return True
+    """Check if the button is pressed with debouncing."""
+    if not button.value:         # Button is pressed (pull-up means pressed is low/false)
+        time.sleep(0.05)         # Debounce delay
+        return not button.value  # Return the debounced button state
     return False
 
 def verbose_print(message):
