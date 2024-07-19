@@ -88,6 +88,7 @@ def execute_script():
     script_path = config.get('script_path')
 
     if script_path:
+        verbose_print(f"Executing script at: {script_path} on platform: {platform}")
         if platform == "windows":
             keyboard.press(Keycode.GUI, Keycode.R)
             keyboard.release_all()
@@ -99,7 +100,7 @@ def execute_script():
             time.sleep(1)
             keyboard_layout.write(f'{script_path}\n')
     else:
-        print("Script path not found in config file")
+        verbose_print("Script path not found in config file")
 
 def send_keystroke():
     """
@@ -111,7 +112,7 @@ def send_keystroke():
     keycodes = [getattr(Keycode, key) for key in keys if hasattr(Keycode, key)]
     if keycodes:
         keyboard.press(*keycodes)  # Press all the keycodes
-        keyboard.release_all()  # Then release them
+        keyboard.release_all()     # Then release them
     else:
         print("No valid keycodes found or provided.")
 
