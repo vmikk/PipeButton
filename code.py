@@ -16,6 +16,7 @@ last_verbose_message = None  # Variable to store the last printed message
 
 ## Buit-in LED (NeoPixel)
 np = neopixel.NeoPixel(board.GP16, 1)
+np.brightness = 0.3
 
 ## Initialize digital inputs for the 3-positional slide switch
 switch_mode1 = digitalio.DigitalInOut(board.GP9)
