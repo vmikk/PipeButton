@@ -84,7 +84,7 @@ def execute_script():
     Executes a script based on the configuration read from 'pipebutton.config' file.
     """
     config = read_config()
-    platform = config.get('platform')
+    platform = config.get('platform', 'windows')  # Default to 'windows' if not specified
     script_path = config.get('script_path')
 
     if script_path:
@@ -205,7 +205,7 @@ def main():
         elif active_mode.startswith("Mode 3"):
             ## Fetch the platform configuration from the config file
             ## If no platform is specified, it defaults to 'windows'
-            execute_script(read_config().get('platform', 'windows'))
+            execute_script()
         
         ## Pause for a second with the LED off
         time.sleep(0.5)
