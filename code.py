@@ -127,21 +127,19 @@ def type_file_content():
         # Text files should be in the directory named 'texts'
         files = os.listdir(textdir)
         if not files:
-            print("No text files found.")
+            verbose_print("No text files found.")
             return
         
         file_path = textdir + '/' + random.choice(files)
-        if verbose:
-            print(f"Selected file: {file_path}")
+        verbose_print(f"Selected file: {file_path}")
         with open(file_path, 'r') as file:
             content = file.read()
             i = 0
             while i < len(content):
 
                 ## Check if the button is pressed again to interrupt typing
-                if not button.value:
-                    if verbose:
-                        print("Typing interrupted by button press.")
+                if is_button_pressed():
+                    verbose_print("Typing interrupted by button press.")
                     return
                 
                 char = content[i]
