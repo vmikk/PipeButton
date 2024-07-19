@@ -162,7 +162,7 @@ def type_file_content():
 
 def main():
     """
-    Main function that initializes the LED and executes the script after a delay.
+    Main function
     """
 
     led.value = True
@@ -186,10 +186,10 @@ def main():
 
     if verbose:
         if active_mode:
-            print(f"{active_mode} active.")
-            print(f"Active pins: {', '.join(active_pins)}. Setting LED accordingly.")
+            verbose_print(f"{active_mode} active.")
+            # verbose_print(f"Active pins: {', '.join(active_pins)}. Setting LED accordingly.")
         else:
-            print("No active pins. LED turned off.")
+            verbose_print("No active pins. LED turned off.")
             np[0] = (0, 0, 0)  # Turn off LED if no switches are active
 
     current_button_state = is_button_pressed()
@@ -197,8 +197,7 @@ def main():
     # Check if the button is pressed when a mode is active
     if active_mode and current_button_state and not button_was_pressed:
         led.value = False  # Turn off the LED when button is pressed
-        if verbose:
-            print(f"Button pressed in {active_mode}.")
+        verbose_print(f"Button pressed in {active_mode}.")
         if active_mode.startswith("Mode 1"):
             type_file_content()
         elif active_mode.startswith("Mode 2"):
