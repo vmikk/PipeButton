@@ -8,6 +8,7 @@ Instant bioinformatics analysis at the push of a button.
 - Large push button
 - 3-positional sliding switch
 - USB type C cable
+- PCB prototype board and connecting wires
 
 ## Software Requirements
 
