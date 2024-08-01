@@ -22,3 +22,11 @@ Instant bioinformatics analysis at the push of a button.
 3. Assemble the hardware
 4. Upload code and config to the Pico
 
+## Usage
+
+Simply press the large button to start the fun.  
+Use the sliding switch to toggle between different "analysis" modes.  
+
+Enjoy the simplicity of performing complex bioinformatic analyses with just a single push! 😄
+
+
